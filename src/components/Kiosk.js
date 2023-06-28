@@ -7,6 +7,19 @@ const products = [
     {pno: 4, pname:'Latte', price: 5000}
 ]
 
+const getTotal = (arr) =>{
+    
+    if(!arr || arr.length === 0){
+        return 0
+    }
+    let sum = 0;
+
+    for(const ele of arr){
+        sum += (ele.price * ele.qty)
+    }
+    return sum
+}
+
 const Kiosk = () => {
 
     const [items, setItems] = useState([])
@@ -27,6 +40,28 @@ const Kiosk = () => {
         cartItem.qty += 1
         setItems([...items])
 
+    }
+
+    const handleClickQty = (pno, amount) => {
+        console.log("pno", pno, "amount", amount)
+
+        const target = items.filter(item => item.pno === pno)[0]
+
+        console.log(target)
+
+        // increse
+        if(amount === 1){
+            target.qty += 1
+            setItems([...items])
+        }else {
+
+            if(target.qty === 1){
+                setItems( items.filter(ele => ele.pno !== pno) )
+            }else {
+                target.qty -= 1
+                setItems([...items])
+            }
+        }
     }
 
     return ( 
@@ -58,12 +93,19 @@ const Kiosk = () => {
                             <div>{item.price}</div>
                         </div>
                         <div className="flex justify-center text-2xl">
-                            <button className="m-1 rounded-lg bg-orange-400 p-4">+</button>
+                            <button className="m-1 rounded-lg bg-orange-400 p-4"
+                            onClick={() => handleClickQty(item.pno , 1)}
+                            >+</button>
                             <p className="m-2 text-red-600 p-2">{item.qty}</p>
-                            <button className="m-1 rounded-lg bg-orange-400 p-4">-</button>
+                            <button className="m-1 rounded-lg bg-orange-400 p-4"
+                            onClick={() => handleClickQty(item.pno , -1)}
+                            >-</button>
                         </div>
                     </li> )}
                 </ul>
+                <div className="bg-blue-950 text-white text-5xl ">
+                    TOTAL {getTotal(items)}
+                </div>
             </div>
         </div>
      );
