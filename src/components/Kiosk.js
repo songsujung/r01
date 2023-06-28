@@ -1,10 +1,4 @@
 import { useState } from "react"
-import styled from "styled-components"
-
-const Img = styled.img`
-width:200px
-height:300px
-`
 
 const products = [
     {pno: 1, pname:'Americano', price: 7000, img:"/Americano.jpeg"},
@@ -86,7 +80,7 @@ const Kiosk = () => {
                     className="text-2xl underline m-3 p-3 rounded-lg bg-blue-300"
                     onClick={() => {handleClickBuy(p)}}
                     >
-                        <Img src={require(`../image/c0${p.pno}.jpeg`)} /> {p.pname} {p.price}
+                        <img src={require(`../image/c0${p.pno}.jpeg`)} /> {p.pname} {p.price}
                         <button className="border-2 m-2 p-2 rounded-lg border-blue-500">BUY</button>
                     </li>)}
                </ul>
