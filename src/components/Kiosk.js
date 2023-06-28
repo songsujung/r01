@@ -1,10 +1,16 @@
 import { useState } from "react"
+import styled from "styled-components"
+
+const Img = styled.img`
+width:200px
+height:300px
+`
 
 const products = [
-    {pno: 1, pname:'Americano', price: 7000},
-    {pno: 2, pname: 'Cocoa', price: 6000},
-    {pno: 3, pname:'Milk Tea', price: 9000},
-    {pno: 4, pname:'Latte', price: 5000}
+    {pno: 1, pname:'Americano', price: 7000, img:"/Americano.jpeg"},
+    {pno: 2, pname: 'Latte', price: 6000, img: 'Latte.jpeg'},
+    {pno: 3, pname:'Ade', price: 9000, img: 'Ade.jpeg'},
+    {pno: 4, pname:'Smoothie', price: 5000, img: 'Smmothie.jpeg'}
 ]
 
 const getTotal = (arr) =>{
@@ -65,26 +71,30 @@ const Kiosk = () => {
     }
 
     return ( 
-        <div className="w-full h-[100vh] bg-blue-300 flex"> 
+        <div className="w-full h-[100vh] bg-white flex"> 
+            
             <div className="w-2/3 bg-white">
-               <div className="text-4xl font-extrabold">products</div> 
+                <div className="w-1/6">
+                    <img src="/logo.png"/>
+                </div>
+               <div className="text-4xl text-orange-950 font-extrabold">products</div> 
 
-               <ul>
+               <ul className="flex">
                 {products.map( p => 
-                    <li 
+                    <li
                     key = {p.pno}
-                    className="text-2xl underline m-3 p-3 bg-red-200"
+                    className="text-2xl underline m-3 p-3 rounded-lg bg-blue-300"
                     onClick={() => {handleClickBuy(p)}}
                     >
-                        {p.pno} - {p.pname} - {p.price}
-                        <button className="border-2 m-2 p-2 rounded-sm border-blue-300">BUY</button>
+                        <Img src={require(`../image/c0${p.pno}.jpeg`)} /> {p.pname} {p.price}
+                        <button className="border-2 m-2 p-2 rounded-lg border-blue-500">BUY</button>
                     </li>)}
                </ul>
             </div>
             <div className="w-1/3">
-                <div className="text-4xl font-extrabold">Cart</div> 
+                <div className="text-4xl text-orange-950 font-extrabold">Cart</div> 
 
-                <ul>
+                <ul className="bg-gray-300">
                     {items.map( (item,idx) => 
                     <li key={idx} className="border-2">
                         <div className="flex text-3xl text-white m-4 p-4">
@@ -93,11 +103,11 @@ const Kiosk = () => {
                             <div>{item.price}</div>
                         </div>
                         <div className="flex justify-center text-2xl">
-                            <button className="m-1 rounded-lg bg-orange-400 p-4"
+                            <button className="m-1 rounded-lg bg-white p-4"
                             onClick={() => handleClickQty(item.pno , 1)}
                             >+</button>
-                            <p className="m-2 text-red-600 p-2">{item.qty}</p>
-                            <button className="m-1 rounded-lg bg-orange-400 p-4"
+                            <p className="m-2 p-2">{item.qty}</p>
+                            <button className="m-1 rounded-lg bg-white p-4"
                             onClick={() => handleClickQty(item.pno , -1)}
                             >-</button>
                         </div>
