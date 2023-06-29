@@ -1,6 +1,7 @@
 import Counter from "./components/Counter";
 import Counter2 from "./components/Counter2";
 import Kiosk from "./components/Kiosk";
+import Todo from "./components/todo";
 import TodoInput from "./components/todo/TodoInput";
 import ZCounter from "./components/zcounter";
 import ZKiosk from "./components/zkiosk";
@@ -12,7 +13,7 @@ function App() {
 
   return (
     <div>
-      <TodoInput></TodoInput>
+      <Todo></Todo>
     </div>
     
   );
