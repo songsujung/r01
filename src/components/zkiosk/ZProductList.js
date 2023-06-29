@@ -5,7 +5,9 @@ const products = [
     {pno: 4, pname:'Smoothie', price: 5000, img: 'Smmothie.jpeg'}
 ]
 
-const ZProductList = (buyProduct, viewProduct) => {
+const ZProductList = ( {buyProduct, viewProduct}) => {
+
+    console.log("buyproduct" , buyProduct)
 
     return ( 
         <div className="w-full bg-indigo-500 text-3xl m-12 p-10">
@@ -15,7 +17,7 @@ const ZProductList = (buyProduct, viewProduct) => {
                     {p.pname}
                       <button 
                       className="bg-red-400" 
-                      onClick={() => buyProduct({...p})}
+                      onClick={() => {buyProduct({...p})}}
                       >BUY</button>
                 </li>)}
             </ul>
