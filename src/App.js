@@ -1,19 +1,11 @@
-import Counter from "./components/Counter";
-import Counter2 from "./components/Counter2";
-import Kiosk from "./components/Kiosk";
-import Todo from "./components/todo";
-import TodoInput from "./components/todo/TodoInput";
-import ZCounter from "./components/zcounter";
-import ZKiosk from "./components/zkiosk";
-import SampleLayout from "./layout/SampleLayout";
-import TemplatePage from "./layout/TemlatePage";
+import Todo1 from "./components/todo1";
 
 
 function App() {
 
   return (
     <div>
-      <Todo></Todo>
+      <Todo1></Todo1>
     </div>
     
   );
