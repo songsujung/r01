@@ -6,37 +6,42 @@ import uuid from 'react-uuid'
 
 const Todo1 = () => {
 
-    const [cmd, setCmd] = useState("list")
     const [todos, setTodos] = useState([])
-
-    const changeView = (str) => {
-        setCmd(str)
-    }
+    
+    const [current, setCurrent] = useState(null)
 
     const addTodo = (todoObj) => {
-
         console.log( uuid(), todoObj)
-
         setTodos([...todos, {tno:uuid(), ...todoObj}])
-        setCmd('list')
     }
 
-    const getView = () => {
-        
-        if(cmd === 'list'){
-            return <Todo1List changeView={changeView}></Todo1List>
-        }else if(cmd === 'input'){
-            return <Todo1Input changeView={changeView} addTodo={addTodo}></Todo1Input>
-        }else if(cmd === 'read'){
-            return <Todo1Read changeView={changeView}></Todo1Read>
-        }
+    const requestView = (tno) => {
+        const target = todos.filter(todo => todo.tno === tno)[0]
+        console.log("requestView", target)
+        setCurrent(target)
     }
+
+    const remove = (tno) => {
+        setTodos(todos.filter(todo => todo.tno !== tno))
+        setCurrent(null)
+    }
+
+    const modify = (modifiedTodo) => {
+        const target = todos.filter(todo => todo.tno === modifiedTodo.tno)[0]
+        target.title = modifiedTodo.title
+        setTodos([...todos])
+        setCurrent(null)
+    }
+
+
 
     return ( 
         <>
         <div className="text-5xl">Todo 1</div>
         <div>
-            {getView()}
+        <Todo1Input addTodo={addTodo}></Todo1Input>
+        <Todo1Read current={current} remove={remove} modify={modify}></Todo1Read>
+        <Todo1List requestView={requestView} todos={todos}></Todo1List>
         </div>
         </>
      );

@@ -1,10 +1,22 @@
-const Todo1List = ({changeView}) => {
-    return ( 
-        <div className="w-full h-[90vh] bg-blue-200">
-            <div>Todo1 List</div>
-            <button onClick={() => changeView("input")}>INPUT</button>
-        </div>
-     );
-}
- 
-export default Todo1List;
+const Todo1List = ({requestView, todos}) => {
+    return (
+      <div className="w-full bg-blue-300">
+        <div>Todo1 List</div>
+        {/* 4번 */}
+  
+        <ul>
+          {todos.map( t =>
+            <li 
+              key={t.tno}
+              onClick={() => requestView(t.tno)}
+            >
+              {t.tno} - {t.title}
+            </li>
+          )}
+        </ul>
+  
+      </div>
+    );
+  }
+  
+  export default Todo1List;
