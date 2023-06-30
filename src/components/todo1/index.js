@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Todo1List from "./Todo1List";
 import Todo1Input from "./Todo1Input";
 import Todo1Read from "./Todo1Read";
@@ -31,6 +31,19 @@ const Todo1 = () => {
         target.title = modifiedTodo.title
         setTodos([...todos])
         setCurrent(null)
+    }
+
+    useEffect(() => {
+        const jsonStr = localStorage.getItem("todos")
+
+        if(jsonStr){
+            setTodos(JSON.parse(jsonStr))
+        }
+    }, [])
+
+    const saveAll = () => {
+        const str = JSON.stringify(todos)
+        localStorage.setItem("todos", str)
     }
 
 
